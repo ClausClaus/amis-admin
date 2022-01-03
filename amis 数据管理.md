@@ -27,6 +27,7 @@
 
 - https://baidu.github.io/amis/zh-CN/docs/start/getting-started search key: getComponentByName
 - [作用域之外, 有办法修改data的值吗? #872 ](https://github.com/baidu/amis/issues/872)
+- [页面间通信](https://baidu.gitee.io/amis/zh-CN/docs/extend/custom-react#%E7%BB%84%E4%BB%B6%E9%97%B4%E9%80%9A%E4%BF%A1)
 
 
 
