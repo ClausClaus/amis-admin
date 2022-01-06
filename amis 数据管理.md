@@ -38,6 +38,8 @@
 
 <img width="1219" alt="截屏2022-01-06 16 29 59" src="https://user-images.githubusercontent.com/21154310/148353136-1ea59aed-6cfa-4aed-b9d6-47b96a8d0e47.png">
 
+- props.getPristineValueByName('xxx') // 获取原始值
+
 
 
 ### history warning
