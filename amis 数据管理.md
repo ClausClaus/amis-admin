@@ -29,6 +29,15 @@
 - [作用域之外, 有办法修改data的值吗? #872 ](https://github.com/baidu/amis/issues/872)
 - [页面间通信](https://baidu.gitee.io/amis/zh-CN/docs/extend/custom-react#%E7%BB%84%E4%BB%B6%E9%97%B4%E9%80%9A%E4%BF%A1)
 
+### amis内部状态管理方法
+
+- props.updateData()
+- props.setValues()
+
+> 内部调用的是同一个函数，只是名称不同而已
+
+<img width="1219" alt="截屏2022-01-06 16 29 59" src="https://user-images.githubusercontent.com/21154310/148353136-1ea59aed-6cfa-4aed-b9d6-47b96a8d0e47.png">
+
 
 
 ### history warning
