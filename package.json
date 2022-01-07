@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "webpack --watch",
     "start": "webpack-dev-server --open",
-    "build": "webpack"
+    "build": "webpack",
+    "format": "prettier --write '**/*.{ts,tsx,js,vue,css,scss,html,json}'"
   },
   "keywords": [
     "amis",
