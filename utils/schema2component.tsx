@@ -4,8 +4,6 @@ import React = require('react')
 
 export default function (schema: Schema) {
   return (props: any) => {
-    console.log(`props`, props)
-
-    return <AMisRenderer schema={schema} {...props} />
+    return <AMisRenderer schema={schema} session={schema.session} {...props} />
   }
 }

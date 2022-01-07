@@ -18,9 +18,22 @@ interface RendererProps {
 @observer
 export default class AMisRenderer extends React.Component<RendererProps> {
   env: any = null
+  amisScopeRef: any = null
 
   handleAction = (e: any, action: Action) => {
     this.env.alert(`没有识别的动作：${JSON.stringify(action)}`)
+  }
+  createProps(): any {
+    const { store, onAction, ...rest } = this.props
+    let amisProps = {
+      onAction: onAction || this.handleAction,
+      theme: store && store.theme,
+      ...rest,
+      scopeRef: (ref: any) => (this.amisScopeRef = ref),
+      amisScopeRef: this.amisScopeRef,
+    }
+    console.log('this.amisScopeRef :>> ', this.amisScopeRef)
+    return amisProps
   }
 
   constructor(props: RendererProps) {
@@ -48,11 +61,7 @@ export default class AMisRenderer extends React.Component<RendererProps> {
       }
       const idx = to.indexOf('?')
       const idx2 = to.indexOf('#')
-      let pathname = ~idx
-        ? to.substring(0, idx)
-        : ~idx2
-        ? to.substring(0, idx2)
-        : to
+      let pathname = ~idx ? to.substring(0, idx) : ~idx2 ? to.substring(0, idx2) : to
       let search = ~idx ? to.substring(idx, ~idx2 ? idx2 : undefined) : ''
       let hash = ~idx2 ? to.substring(idx2) : ''
       if (!pathname) {
@@ -75,7 +84,7 @@ export default class AMisRenderer extends React.Component<RendererProps> {
 
     // todo，这个过程可以 cache
     this.env = {
-      session: 'global',
+      session: this.props.schema.session || 'global',
       updateLocation:
         props.updateLocation ||
         ((location: string, replace: boolean) => {
@@ -100,9 +109,7 @@ export default class AMisRenderer extends React.Component<RendererProps> {
           }
           const query = qs.parse(search.substring(1))
           const currentQuery = qs.parse(location.search.substring(1))
-          return Object.keys(query).every(
-            (key) => query[key] === currentQuery[key]
-          )
+          return Object.keys(query).every((key) => query[key] === currentQuery[key])
         } else if (pathname === location.pathname) {
           return true
         }
@@ -116,9 +123,7 @@ export default class AMisRenderer extends React.Component<RendererProps> {
           }
           to = normalizeLink(to)
           if (action && action.actionType === 'url') {
-            action.blank === false
-              ? (window.location.href = to)
-              : window.open(to)
+            action.blank === false ? (window.location.href = to) : window.open(to)
             return
           }
           if (/^https?:\/\//.test(to)) {
@@ -138,15 +143,9 @@ export default class AMisRenderer extends React.Component<RendererProps> {
   }
 
   render() {
-    const { schema, store, onAction, ...rest } = this.props
-    return renderSchema(
-      schema,
-      {
-        onAction: onAction || this.handleAction,
-        theme: store && store.theme,
-        ...rest,
-      },
-      this.env
-    )
+    console.log('this.amisScopeRef :>> ', this.amisScopeRef)
+    const { schema } = this.props
+    const renderAmis = renderSchema(schema, this.createProps(), this.env)
+    return renderAmis
   }
 }
