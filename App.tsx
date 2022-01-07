@@ -4,7 +4,7 @@ import { toast, alert, confirm } from 'amis'
 import axios from 'axios'
 import { MainStore } from './stores/index'
 import * as copy from 'copy-to-clipboard'
-import RootRoute from './routes/index'
+import RootRoute from './src/index'
 import './utils/polyfill'
 
 // css
@@ -60,12 +60,10 @@ export default function (): JSX.Element {
       confirm,
       copy: (contents: string, options: any = {}) => {
         const ret = copy(contents, options)
-        ret &&
-          (!options || options.shutup !== true) &&
-          toast.info('内容已拷贝到剪切板')
+        ret && (!options || options.shutup !== true) && toast.info('内容已拷贝到剪切板')
         return ret
       },
-    }
+    },
   ))
 
   return (
