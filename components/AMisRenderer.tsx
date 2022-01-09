@@ -32,7 +32,6 @@ export default class AMisRenderer extends React.Component<RendererProps> {
       scopeRef: (ref: any) => (this.amisScopeRef = ref),
       amisScopeRef: this.amisScopeRef,
     }
-    console.log('this.amisScopeRef :>> ', this.amisScopeRef)
     return amisProps
   }
 
@@ -143,7 +142,6 @@ export default class AMisRenderer extends React.Component<RendererProps> {
   }
 
   render() {
-    console.log('this.amisScopeRef :>> ', this.amisScopeRef)
     const { schema } = this.props
     const renderAmis = renderSchema(schema, this.createProps(), this.env)
     return renderAmis
