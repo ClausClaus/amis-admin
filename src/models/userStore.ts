@@ -1,9 +1,12 @@
+import { createModel } from 'hox'
 import { useState } from 'react'
 
-export default () => {
+const userStore = () => {
   const [user, setUser] = useState('userStoreName')
   return {
     user,
     setUser,
   }
 }
+
+export default createModel(userStore)

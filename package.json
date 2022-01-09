@@ -25,6 +25,7 @@
     "copy-to-clipboard": "3.0.8",
     "core-js": "^2.5.7",
     "font-awesome": "^4.7.0",
+    "hox": "^1.1.5",
     "lodash": "^4.17.11",
     "mobx": "^4.5.0",
     "mobx-react": "^6.1.4",
