@@ -14,7 +14,6 @@ class Basic extends React.Component<any> {
 
   render(): React.ReactNode {
     const props = this.props
-    console.log('props.user.user, :>> ', props.user.user)
 
     const schema: Schema = {
       definitions: {
@@ -43,8 +42,14 @@ class Basic extends React.Component<any> {
               return api
             },
           },
-          redirect: '/admin/form/basic/advanced?age=${age}',
+
           actions: [
+            {
+              type: 'button',
+              actionType: 'link',
+              link: '/admin/form/basic/advanced?age=${age}',
+              label: '跳转到advanced',
+            },
             {
               label: '保存',
               type: 'submit',
