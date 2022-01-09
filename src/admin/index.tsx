@@ -1,12 +1,5 @@
 import * as React from 'react'
-import {
-  RouteComponentProps,
-  Route,
-  Link,
-  Switch,
-  Redirect,
-  matchPath,
-} from 'react-router-dom'
+import { RouteComponentProps, Route, Link, Switch, Redirect, matchPath } from 'react-router-dom'
 import { Layout, Button, AsideNav } from 'amis'
 import { IMainStore } from '../../stores'
 import { inject, observer } from 'mobx-react'
@@ -24,7 +17,7 @@ type NavItem = {
   children?: Array<NavItem>
   icon?: string
   path?: string
-  component?: React.ReactType
+  component?: any
   getComponent?: () => Promise<React.ReactType>
 }
 const navigations: Array<NavItem> = [
@@ -113,7 +106,7 @@ function navigations2route(pathPrefix = PATH_PREFIX) {
               }
               component={item.component}
               exact
-            />
+            />,
           )
         } else if (item.path && item.getComponent) {
           routes.push(
@@ -126,7 +119,7 @@ function navigations2route(pathPrefix = PATH_PREFIX) {
               }
               component={item.getComponent}
               exact
-            />
+            />,
           )
         }
       })
@@ -158,10 +151,7 @@ export default class Admin extends React.Component<AdminProps> {
     return (
       <div>
         <div className={`a-Layout-brandBar`}>
-          <button
-            onClick={store.toggleOffScreen}
-            className="pull-right visible-xs"
-          >
+          <button onClick={store.toggleOffScreen} className="pull-right visible-xs">
             <i className="glyphicon glyphicon-align-justify"></i>
           </button>
           <div className={`a-Layout-brand`}>
@@ -171,7 +161,7 @@ export default class Admin extends React.Component<AdminProps> {
         </div>
         <div className={`a-Layout-headerBar`}>
           <div className="nav navbar-nav hidden-xs">
-            <Button
+            {/* <Button
               level="link"
               className="no-shadow navbar-btn"
               onClick={store.toggleAsideFolded}
@@ -179,10 +169,8 @@ export default class Admin extends React.Component<AdminProps> {
               placement="bottom"
               iconOnly
             >
-              <i
-                className={store.asideFolded ? 'fa fa-indent' : 'fa fa-dedent'}
-              />
-            </Button>
+              <i className={store.asideFolded ? 'fa fa-indent' : 'fa fa-dedent'} />
+            </Button> */}
           </div>
 
           <div className="hidden-xs p-t-sm pull-right">
@@ -214,43 +202,32 @@ export default class Admin extends React.Component<AdminProps> {
                 key="expand-toggle"
                 className={cx('AsideNav-itemArrow')}
                 onClick={(e) => toggleExpand(link, e)}
-              ></span>
+              ></span>,
             )
           }
 
           link.badge &&
             children.push(
-              <b
-                key="badge"
-                className={cx(
-                  `AsideNav-itemBadge`,
-                  link.badgeClassName || 'bg-info'
-                )}
-              >
+              <b key="badge" className={cx(`AsideNav-itemBadge`, link.badgeClassName || 'bg-info')}>
                 {link.badge}
-              </b>
+              </b>,
             )
 
           if (link.icon) {
-            children.push(
-              <i key="icon" className={cx(`AsideNav-itemIcon`, link.icon)} />
-            )
+            children.push(<i key="icon" className={cx(`AsideNav-itemIcon`, link.icon)} />)
           } else if (store.asideFolded && depth === 1) {
             children.push(
               <i
                 key="icon"
-                className={cx(
-                  `AsideNav-itemIcon`,
-                  link.children ? 'fa fa-folder' : 'fa fa-info'
-                )}
-              />
+                className={cx(`AsideNav-itemIcon`, link.children ? 'fa fa-folder' : 'fa fa-info')}
+              />,
             )
           }
 
           children.push(
             <span key="label" className={cx('AsideNav-itemLabel')}>
               {link.label}
-            </span>
+            </span>,
           )
 
           return link.path ? (
@@ -270,11 +247,7 @@ export default class Admin extends React.Component<AdminProps> {
           ) : (
             <a
               onClick={
-                link.onClick
-                  ? link.onClick
-                  : link.children
-                  ? () => toggleExpand(link)
-                  : undefined
+                link.onClick ? link.onClick : link.children ? () => toggleExpand(link) : undefined
               }
             >
               {children}
@@ -286,7 +259,7 @@ export default class Admin extends React.Component<AdminProps> {
             link.path && link.path[0] === '/'
               ? ContextPath + link.path
               : `${ContextPath}${PATH_PREFIX}/${link.path}`,
-            location
+            location,
           )
         }
       />
